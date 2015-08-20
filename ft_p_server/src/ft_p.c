@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/19 18:39:05 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/20 13:44:23 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int			create_server(int port)
 
 static void			send_ckeck(int cs)
 {
-	ft_putstr("Reponse Sent\n");
 	write(cs, "SUCCESS\0", 8);
 }
 
@@ -81,7 +80,7 @@ static int			do_work(int cs)
 		if (buf[0] != '\x2')
 			send_ckeck(cs);
 	}
-	ft_bzero(buf, sizeof(buf));
+	ft_bzero(buf, 1023);
 	return (1);
 }
 

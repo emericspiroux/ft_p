@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/19 18:45:52 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/20 14:02:00 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,24 @@ static int			create_client(char *addr, int port)
 	return (sock);
 }
 
-static int			prompt(int sock)
+static char*			prompt(int sock)
 {
 	char			*request;
 	char			request_ori[1024];
 
+	request = NULL;
+	ft_bzero(request_ori, 1023);
 	ft_putstr("ft_p (client) ?>");
 	read(0, request_ori, 1023);
+	ft_bzero(request, ft_strlen(request));
 	request = ft_strtrim(request_ori);
    	if (!(write(sock, request, ft_strlen(request))))
    	{
    		ft_putstr("Error write socket\n");
-   		return (0);
+   		return (NULL);
    	}
-   	free(request);
    	ft_bzero(request_ori, 1023);
-   	return (1);
+   	return (request);
 }
 
 static int			read_response(int sock)
@@ -65,6 +67,7 @@ static int			read_response(int sock)
 	if ((r = read(sock, buf, 1023)) <= 0)
 	{
 		ft_putstr("Error read socket\n");
+		return (0);
 	}
 	else
 	{
@@ -72,15 +75,20 @@ static int			read_response(int sock)
 			ft_putstr(buf);
 			ft_putstr("\n");
 	}
+	return (1);
 }
 
 static int			do_work(int sock)
 {
+	char			*request;
+
 	while (1)
 	{
-		if (!prompt(sock))
+		if (!(request = prompt(sock)))
 			exit(EXIT_FAILURE);
-		read_response(sock);
+		if (!read_response(sock))
+			exit(EXIT_FAILURE);
+
 		if (ft_strstr(request, "quit"))
 		{
 			if ((write(sock, "\x2\0", 2) < 0))
@@ -89,6 +97,7 @@ static int			do_work(int sock)
    				break;
    		}
    	}
+   	free(request);
 	return (0);
 }
 
