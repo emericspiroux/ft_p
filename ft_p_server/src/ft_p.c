@@ -6,21 +6,11 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/20 18:03:38 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/20 19:26:05 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <sys/types.h>
-#include <unistd.h>
-
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#define NB_ACCEPT_CLIENT 50
 
 static void			usage()
 {
@@ -60,14 +50,28 @@ static void			send_error(int cs)
 	write(cs, "ERROR\0", 8);
 }
 
+static void			send_unknow(int cs)
+{
+	write(cs, "ft_p (serveur): Unknow Command\0", 31);
+}
+
+static int			exec_command(int argc, char **argv)
+{
+	if (ft_strcmp(argv[0], "ls") == 0)
+			return (option_ls(argc, argv));
+	return (-2);
+}
+
 static int			do_command_line(char *request)
 {
+	char			**argv;
+	unsigned int	argc;
+
 	if (request[0] != '\x2')
 	{
-		ft_putstr("Received [");
-		ft_putstr(request);
-		ft_putstr("]\n");
-		return (1);
+		argv = ft_strsplit(request, ' ');
+		argc = ft_strcontains(request, ' ');
+		return (exec_command(argc, argv));
 	}
 	return (0);
 }
@@ -87,12 +91,15 @@ static int			do_work(int cs)
 		else
 		{
 			buf[r] = '\0';
+			dup2(cs, 1);
 			ret = do_command_line(buf);
+			if (ret == 1)
+				send_ckeck(cs);
+			else if (ret == -1)
+				send_error(cs);
+			else if (ret == -2)
+				send_unknow(cs);
 		}
-		if (ret == 1)
-			send_ckeck(cs);
-		else if (ret == -1)
-			send_error(cs);
 	}
 	ft_bzero(buf, 1023);
 	return (1);
