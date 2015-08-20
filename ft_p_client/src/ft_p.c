@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/20 14:02:00 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/20 18:03:04 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ static char*			prompt(int sock)
 	ft_bzero(request, ft_strlen(request));
 	request = ft_strtrim(request_ori);
    	if (!(write(sock, request, ft_strlen(request))))
-   	{
-   		ft_putstr("Error write socket\n");
    		return (NULL);
-   	}
    	ft_bzero(request_ori, 1023);
    	return (request);
 }
@@ -90,14 +87,11 @@ static int			do_work(int sock)
 			exit(EXIT_FAILURE);
 
 		if (ft_strstr(request, "quit"))
-		{
-			if ((write(sock, "\x2\0", 2) < 0))
-   				ft_putstr("Error write socket\n");
-   			else
-   				break;
-   		}
+   			break;
+   		free(request);
    	}
-   	free(request);
+   	if ((write(sock, "\x2\0", 2) < 0))
+		exit(EXIT_FAILURE);
 	return (0);
 }
 
