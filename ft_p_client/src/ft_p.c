@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/20 18:28:59 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/21 16:23:39 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,39 +56,38 @@ static char*			prompt(int sock)
    	return (request);
 }
 
-static int			read_response(int sock)
+static int			do_commande_line(int sock, char **argv)
 {
-	int				r;
-	char			buf[1024];
-
-	if ((r = read(sock, buf, 1023)) <= 0)
-	{
-		ft_putstr("Error read socket\n");
-		return (0);
-	}
-	else
-	{
-			buf[r] = '\0';
-			ft_putstr(buf);
-			ft_putstr("\n");
-	}
-	return (1);
+	if (ft_strcmp(argv[0], "ls") == 0)
+		return (option_ls(sock));
+	if (ft_strcmp(argv[0], "quit") == 0)
+		return (1);
+	return (0);
 }
 
 static int			do_work(int sock)
 {
 	char			*request;
+	char			**argv;
 
 	while (1)
 	{
 		if (!(request = prompt(sock)))
 			exit(EXIT_FAILURE);
-		if (!read_response(sock))
-			exit(EXIT_FAILURE);
 
-		if (ft_strstr(request, "quit"))
-   			break;
+		argv = ft_strsplit(request, ' ');
+		if (!do_commande_line(sock, argv))
+		{
+			ft_putstr("ft_p : ");
+			ft_putstr(argv[0]);
+			ft_putstr(" : commande unkown\n");
+   		}
+
+   		if (ft_strstr(request, "quit"))
+   				break;
+
    		free(request);
+   		free(argv);
    	}
    	if ((write(sock, "\x2\0", 2) < 0))
 		exit(EXIT_FAILURE);

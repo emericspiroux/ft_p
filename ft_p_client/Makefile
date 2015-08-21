@@ -21,7 +21,7 @@ LIBMLX_DIR=/usr/X11/lib
 INC_DIR=includes/
 SRC_DIR=src/
 
-FT_C=$(SRC_DIR)ft_p.c $(SRC_DIR)send_all.c
+FT_C=$(SRC_DIR)ft_p.c $(SRC_DIR)send_all.c $(SRC_DIR)options/option_ls.c
 
 FT_O=$(FT_C:.c=.o)
 

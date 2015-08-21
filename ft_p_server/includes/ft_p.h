@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2015/08/20 19:06:40 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/21 12:28:41 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int		send_all(int socket, void *buffer, size_t length);
 /*
 ** Available Commands
 */
-int		option_ls(int argc, char **argv);
-
+int		option_ls(int cs, int argc, char **argv);
+int		send_confirmation(int cs, int message);
 #endif

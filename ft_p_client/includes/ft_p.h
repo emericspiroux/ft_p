@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2015/08/19 18:12:27 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/20 23:55:16 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@
 # include <arpa/inet.h>
 
 int			send_all(int sock, void *buffer, size_t length);
+
+int			option_ls(int sock);
 
 #endif

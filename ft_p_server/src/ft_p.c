@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/20 19:26:05 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/21 16:20:03 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,14 @@ static int			create_server(int port)
 	return (sock);
 }
 
-static void			send_ckeck(int cs)
-{
-	write(cs, "SUCCESS\0", 8);
-}
-
-static void			send_error(int cs)
-{
-	write(cs, "ERROR\0", 8);
-}
-
-static void			send_unknow(int cs)
-{
-	write(cs, "ft_p (serveur): Unknow Command\0", 31);
-}
-
-static int			exec_command(int argc, char **argv)
+static int			exec_command(int cs, int argc, char **argv)
 {
 	if (ft_strcmp(argv[0], "ls") == 0)
-			return (option_ls(argc, argv));
-	return (-2);
+			return (option_ls(cs, argc, argv));
+	return (0);
 }
 
-static int			do_command_line(char *request)
+static int			do_command_line(int cs, char *request)
 {
 	char			**argv;
 	unsigned int	argc;
@@ -71,7 +56,7 @@ static int			do_command_line(char *request)
 	{
 		argv = ft_strsplit(request, ' ');
 		argc = ft_strcontains(request, ' ');
-		return (exec_command(argc, argv));
+		return (exec_command(cs, argc, argv));
 	}
 	return (0);
 }
@@ -91,14 +76,8 @@ static int			do_work(int cs)
 		else
 		{
 			buf[r] = '\0';
-			dup2(cs, 1);
-			ret = do_command_line(buf);
-			if (ret == 1)
-				send_ckeck(cs);
-			else if (ret == -1)
-				send_error(cs);
-			else if (ret == -2)
-				send_unknow(cs);
+			ret = do_command_line(cs, buf);
+			send_confirmation(cs, ret);
 		}
 	}
 	ft_bzero(buf, 1023);
