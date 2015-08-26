@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   send_confirmation.c                                :+:      :+:    :+:   */
+/*   ft_getINode.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/21 12:26:08 by larry             #+#    #+#             */
-/*   Updated: 2015/08/25 18:51:31 by larry            ###   ########.fr       */
+/*   Created: 2015/08/21 18:00:17 by larry             #+#    #+#             */
+/*   Updated: 2015/08/21 18:09:49 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-static void			send_check(int cs)
+int		ft_getInode(char *path)
 {
-	write(cs, ANSI_COLOR_GREEN"SUCCESS"ANSI_COLOR_RESET"\x2\0", 17);
-}
+	DIR				*rep;
+	struct dirent	*rf;
 
-static void			send_error(int cs)
-{
-	write(cs, ANSI_COLOR_RED"ERROR"ANSI_COLOR_RESET"\x2\0", 16);
-}
-
-int					send_confirmation(int cs, int message)
-{
-	if (message == 0)
-		send_check(cs);
-	else if (message != 0)
-		send_error(cs);
-	return (0);
+	rf = NULL;
+	rep = NULL;
+	if ((rep = opendir(path)) == NULL)
+		return (-1);
+	rf = readdir(rep);
+	if (closedir(rep) == -1)
+		return (-1);
+	return (rf->d_ino);
 }

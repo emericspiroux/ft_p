@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/21 16:23:39 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/25 19:03:53 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void			usage()
 {
-	ft_putstr("Usage : ./server <ip> <port>\n");
+	ft_putstr("Usage : ./client <ip> <port>\n");
 	exit(-1);
 }
 
@@ -39,7 +39,7 @@ static int			create_client(char *addr, int port)
 	return (sock);
 }
 
-static char*			prompt(int sock)
+static char*			prompt()
 {
 	char			*request;
 	char			request_ori[1024];
@@ -50,18 +50,34 @@ static char*			prompt(int sock)
 	read(0, request_ori, 1023);
 	ft_bzero(request, ft_strlen(request));
 	request = ft_strtrim(request_ori);
-   	if (!(write(sock, request, ft_strlen(request))))
-   		return (NULL);
    	ft_bzero(request_ori, 1023);
    	return (request);
 }
 
-static int			do_commande_line(int sock, char **argv)
+static int			do_commande_line(int sock, char *request, char **argv)
 {
-	if (ft_strcmp(argv[0], "ls") == 0)
-		return (option_ls(sock));
-	if (ft_strcmp(argv[0], "quit") == 0)
-		return (1);
+	if (ft_strcmp(argv[0], "ls") == 0
+		|| ft_strcmp(argv[0], "pwd") == 0
+		|| ft_strcmp(argv[0], "quit") == 0
+		|| ft_strcmp(argv[0], "cd") == 0)
+	{
+		if (!(write(sock, request, ft_strlen(request))))
+		{
+			ft_putstr("ft_p : ");
+			ft_putstr(argv[0]);
+			ft_putstr(" : Error during sending command\n");
+   			return (0);
+		}
+		if (ft_strcmp(argv[0], "ls") == 0)
+			return (option_ls(sock));
+		if (ft_strcmp(argv[0], "pwd") == 0)
+			return (option_pwd(sock));
+		if (ft_strcmp(argv[0], "cd") == 0)
+			return (option_cd(sock));
+	}
+	ft_putstr("ft_p : ");
+	ft_putstr(argv[0]);
+	ft_putstr(" : command unknown\n");
 	return (0);
 }
 
@@ -72,20 +88,15 @@ static int			do_work(int sock)
 
 	while (1)
 	{
-		if (!(request = prompt(sock)))
-			exit(EXIT_FAILURE);
-
-		argv = ft_strsplit(request, ' ');
-		if (!do_commande_line(sock, argv))
+		if (!(request = prompt()))
 		{
-			ft_putstr("ft_p : ");
-			ft_putstr(argv[0]);
-			ft_putstr(" : commande unkown\n");
-   		}
-
-   		if (ft_strstr(request, "quit"))
-   				break;
-
+			ft_putstr("Error during sending command.\n");
+			continue ;
+		}
+		argv = ft_strsplit(request, ' ');
+		if (ft_strcmp(argv[0], "quit") == 0)
+   			break;
+		do_commande_line(sock, request, argv);
    		free(request);
    		free(argv);
    	}

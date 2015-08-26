@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/21 16:20:03 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/25 21:11:56 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ static int			exec_command(int cs, int argc, char **argv)
 {
 	if (ft_strcmp(argv[0], "ls") == 0)
 			return (option_ls(cs, argc, argv));
+	if (ft_strcmp(argv[0], "pwd") == 0)
+			return (option_pwd(cs, argc, argv));
+	if (ft_strcmp(argv[0], "cd") == 0)
+			return (option_cd(cs, argc, argv));
 	return (0);
 }
 
@@ -56,7 +60,7 @@ static int			do_command_line(int cs, char *request)
 	{
 		argv = ft_strsplit(request, ' ');
 		argc = ft_strcontains(request, ' ');
-		return (exec_command(cs, argc, argv));
+		return (exec_command(cs, argc + 1, argv));
 	}
 	return (0);
 }
@@ -76,8 +80,7 @@ static int			do_work(int cs)
 		else
 		{
 			buf[r] = '\0';
-			ret = do_command_line(cs, buf);
-			send_confirmation(cs, ret);
+			do_command_line(cs, buf);
 		}
 	}
 	ft_bzero(buf, 1023);
@@ -98,6 +101,13 @@ static void			add_client(int sock)
 {
 	pid_t			pid;
 	int				cs;
+	int				fnode;
+
+	fnode = autorized_folder(1);
+	ft_putstr("Base Node : ");
+	ft_putnbr(fnode);
+	ft_putstr("\n");
+	ft_putstr(ANSI_COLOR_GREEN"[Server Started]\n"ANSI_COLOR_RESET);
 
 	while (1)
 	{
