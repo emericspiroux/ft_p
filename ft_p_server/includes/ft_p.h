@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2015/08/25 21:11:13 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/26 17:05:53 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <dirent.h>
 # define ANSI_COLOR_RED     "\x1b[31m"
 # define ANSI_COLOR_GREEN   "\x1b[32m"
@@ -43,6 +44,7 @@ int		send_all(int socket, void *buffer, size_t length);
 int		send_confirmation(int cs, int message);
 int		ft_getInode(char *path);
 int		autorized_folder(int display);
+int		error_open(char *path);
 
 /*
 ** Available Commands
@@ -50,5 +52,6 @@ int		autorized_folder(int display);
 int		option_ls(int cs, int argc, char **argv);
 int		option_pwd(int cs, int argc, char **argv);
 int		option_cd(int cs, int argc, char **argv);
+int		option_get(int cs, int argc, char **argv);
 
 #endif

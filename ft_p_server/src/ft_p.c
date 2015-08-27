@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/25 21:11:56 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/26 16:45:10 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int			exec_command(int cs, int argc, char **argv)
 			return (option_pwd(cs, argc, argv));
 	if (ft_strcmp(argv[0], "cd") == 0)
 			return (option_cd(cs, argc, argv));
+	if (ft_strcmp(argv[0], "get") == 0)
+			return (option_get(cs, argc, argv));
 	return (0);
 }
 
