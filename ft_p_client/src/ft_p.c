@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/26 16:29:58 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/27 18:29:15 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static int			do_commande_line(int sock, char *request, char **argv)
 		|| ft_strcmp(argv[0], "pwd") == 0
 		|| ft_strcmp(argv[0], "quit") == 0
 		|| ft_strcmp(argv[0], "cd") == 0
-		|| ft_strcmp(argv[0], "get") == 0)
+		|| ft_strcmp(argv[0], "get") == 0
+		|| ft_strcmp(argv[0], "set") == 0)
 	{
 		if (!(write(sock, request, ft_strlen(request))))
 		{
@@ -71,6 +72,8 @@ static int			do_commande_line(int sock, char *request, char **argv)
 		}
 		if (ft_strcmp(argv[0], "get") == 0)
 			return (option_get(sock, argv[1]));
+		if (ft_strcmp(argv[0], "set") == 0)
+			return (option_set(sock, argv[1]));
 		if (ft_strcmp(argv[0], "ls") == 0)
 			return (option_ls(sock));
 		if (ft_strcmp(argv[0], "pwd") == 0)

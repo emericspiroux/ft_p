@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   send_all.c                                         :+:      :+:    :+:   */
+/*   wait_response.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/19 12:40:03 by larry             #+#    #+#             */
-/*   Updated: 2015/08/19 18:07:46 by larry            ###   ########.fr       */
+/*   Created: 2015/09/02 17:19:04 by larry             #+#    #+#             */
+/*   Updated: 2015/09/02 17:36:56 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-int send_all(int sock, void *buffer, size_t length)
+void			wait_response(int cs)
 {
-    char *ptr = (char*) buffer;
-    while (length > 0)
-    {
-        int i = write(sock, ptr, length);
-        if (i < 1) return false;
-        ptr += i;
-        length -= i;
-    }
-    return (1);
+	char		buf[1024];
+	int			r;
+
+	if ((r = read(cs, buf, 1023)) > 0)
+	{
+		buf[r] = '\0';
+		ft_bzero(buf, 1023);
+	}
+	ft_bzero(buf, 1023);
 }

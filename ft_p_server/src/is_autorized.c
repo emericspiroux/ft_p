@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_pwd.c                                       :+:      :+:    :+:   */
+/*   is_autorized.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/21 16:43:59 by larry             #+#    #+#             */
-/*   Updated: 2015/09/02 17:30:15 by larry            ###   ########.fr       */
+/*   Created: 2015/09/01 16:11:19 by larry             #+#    #+#             */
+/*   Updated: 2015/09/02 16:24:44 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-int				option_pwd(int cs, int argc, char **argv)
+int			is_autorized(char *name, char *path, int ls_opt)
 {
-	pid_t			pid;
-	pid_t			cpid;
-	int				status;
-	struct rusage	usage;
-	struct s_stdout	fd_save;
+	int			fnode;
+	int			asknode;
 
-	fd_save = redirect_stdout(cs);
-	(void)argc;
-	errno = 0;
-	pid = fork();
-	if (pid == 0)
-		execv("/bin/pwd", argv);
-	else
+	fnode = autorized_folder(0);
+	if ((asknode = ft_getInode(path)) == -1)
 	{
-		cpid = wait4(pid, &status, 0, &usage);
-		if (cpid == pid)
-			send_confirmation(cs, WEXITSTATUS(status));
+		if (ls_opt != 1)
+		{
+			error_open_dir(path, 0);
+			return (0);
+		}
+		else
+			return (1);
 	}
-	close_redirect_stdout(fd_save);
+	if (asknode < fnode)
+	{
+		ft_putstr("ft_p: ");
+		ft_putstr(name);
+		ft_putstr(" : Permission denied by server.\n");
+		return (0);
+	}
 	return (1);
 }

@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   autorized_folder.c                                 :+:      :+:    :+:   */
+/*   redirect_stdout.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/25 20:49:34 by larry             #+#    #+#             */
-/*   Updated: 2015/08/26 01:07:13 by larry            ###   ########.fr       */
+/*   Created: 2015/09/02 16:34:29 by larry             #+#    #+#             */
+/*   Updated: 2015/09/02 17:01:03 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-int			autorized_folder(int display)
+struct s_stdout		redirect_stdout(int cs)
 {
-	char			save_dir[PATH_MAX];
-	static int		fnode = 0;
+	t_stdout	fd;
 
-	if (fnode == 0)
-	{
-		getcwd(save_dir, sizeof(save_dir));
-		if (display == 1)
-		{
-			ft_putstr("Access limit to :");
-			ft_putstr(save_dir);
-			ft_putstr("\n");
-		}
-		if ((fnode = ft_getInode(save_dir)) == -1)
-		{
-			ft_putstr("Error on read base Folder.\n");
-			exit(1);
-		}
-		ft_bzero(save_dir, PATH_MAX);
-	}
-	return (fnode);
+	fd.oldfd = dup(cs);
+	fd.save_stdout = dup(1);
+	fd.save_stderror = dup(2);
+	dup2(fd.oldfd, 1);
+	dup2(fd.oldfd, 2);
+	return (fd);
 }

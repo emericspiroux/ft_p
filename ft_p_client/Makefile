@@ -23,6 +23,7 @@ SRC_DIR=src/
 
 FT_C=	$(SRC_DIR)ft_p.c $(SRC_DIR)send_all.c $(SRC_DIR)options/option_ls.c\
 		$(SRC_DIR)options/option_pwd.c $(SRC_DIR)options/option_get.c \
+		$(SRC_DIR)options/option_set.c \
 		$(SRC_DIR)options/option_cd.c $(SRC_DIR)error/error_open.c
 
 FT_O=$(FT_C:.c=.o)

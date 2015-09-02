@@ -6,19 +6,19 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/08/26 16:45:10 by larry            ###   ########.fr       */
+/*   Updated: 2015/09/02 17:39:05 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-static void			usage()
+static void				usage()
 {
 	ft_putstr("Usage : ./server <port>\n");
 	exit(-1);
 }
 
-static int			create_server(int port)
+static int				create_server(int port)
 {
 	int					sock;
 	struct protoent		*proto;
@@ -40,23 +40,25 @@ static int			create_server(int port)
 	return (sock);
 }
 
-static int			exec_command(int cs, int argc, char **argv)
+static int				exec_command(int cs, int argc, char **argv)
 {
 	if (ft_strcmp(argv[0], "ls") == 0)
-			return (option_ls(cs, argc, argv));
+		return (option_ls(cs, argc, argv));
 	if (ft_strcmp(argv[0], "pwd") == 0)
-			return (option_pwd(cs, argc, argv));
+		return (option_pwd(cs, argc, argv));
 	if (ft_strcmp(argv[0], "cd") == 0)
-			return (option_cd(cs, argc, argv));
+		return (option_cd(cs, argc, argv));
 	if (ft_strcmp(argv[0], "get") == 0)
-			return (option_get(cs, argc, argv));
+		return (option_get(cs, argc, argv));
+	if (ft_strcmp(argv[0], "set") == 0)
+		return (option_set(cs, argv[1]));
 	return (0);
 }
 
-static int			do_command_line(int cs, char *request)
+static int				do_command_line(int cs, char *request)
 {
-	char			**argv;
-	unsigned int	argc;
+	char				**argv;
+	unsigned int		argc;
 
 	if (request[0] != '\x2')
 	{
@@ -67,11 +69,11 @@ static int			do_command_line(int cs, char *request)
 	return (0);
 }
 
-static int			do_work(int cs)
+static int				do_work(int cs)
 {
-	int				r;
-	char			buf[1024];
-	int				ret;
+	int					r;
+	char				buf[1024];
+	int					ret;
 
 	ret = 1;
 	while (ret)
@@ -99,11 +101,11 @@ static int				do_accept(int sock)
 	return (cs);
 }
 
-static void			add_client(int sock)
+static void				add_client(int sock)
 {
-	pid_t			pid;
-	int				cs;
-	int				fnode;
+	pid_t				pid;
+	int					cs;
+	int					fnode;
 
 	fnode = autorized_folder(1);
 	ft_putstr("Base Node : ");
@@ -133,10 +135,10 @@ static void			add_client(int sock)
 	}
 }
 
-int					main(int argc, char const *av[])
+int						main(int argc, char const *av[])
 {
-	int		port;
-	int		sock;
+	int					port;
+	int					sock;
 
 	if (argc != 2)
 		usage();

@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/26 16:01:39 by larry             #+#    #+#             */
-/*   Updated: 2015/08/26 17:10:47 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/28 04:18:24 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				error_open(char *path)
 {
-	ft_putstr("ft_p : open : ");
+	ft_putstr("ft_p : client : ");
 	if (EACCES == errno)
 		ft_putstr("The requested access to the file is not allowed\n");
 	else if (EDQUOT == errno)
@@ -31,6 +31,8 @@ int				error_open(char *path)
 		ft_putstr(path);
 		ft_putstr(" is a directory.\n");
 	}
+	else if (errno == 2)
+		ft_putstr("No such file or directory.\n");
 	else if (errno != 0)
 	{
 		ft_putstr("Errno number : ");

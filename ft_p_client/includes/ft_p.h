@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2015/08/26 16:31:44 by larry            ###   ########.fr       */
+/*   Updated: 2015/08/27 18:09:48 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int			option_ls(int sock);
 int			option_pwd(int sock);
 int			option_cd(int sock);
 int			option_get(int sock, char *path);
+int			option_set(int sock, char *path);
 
 #endif
