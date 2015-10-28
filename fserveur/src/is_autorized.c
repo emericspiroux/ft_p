@@ -28,6 +28,7 @@ int				is_autorized(char *name, char *path, int ls_opt)
 		else
 			return (1);
 	}
+
 	if (asknode < fnode)
 	{
 		ft_putstr("ft_p: ");
