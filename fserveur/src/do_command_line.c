@@ -22,7 +22,7 @@ static int				exec_command(int cs, int argc, char **av)
 		return (option_cd(cs, argc, av));
 	if (ft_strcmp(av[0], "get") == 0)
 		return (option_get(cs, argc, av));
-	if (ft_strcmp(av[0], "set") == 0)
+	if (ft_strcmp(av[0], "put") == 0)
 		return (option_set(cs, av[1]));
 	return (0);
 }

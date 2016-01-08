@@ -19,7 +19,7 @@ int				is_command(char *argv)
 		|| ft_strcmp(argv, "quit") == 0
 		|| ft_strcmp(argv, "cd") == 0
 		|| ft_strcmp(argv, "get") == 0
-		|| ft_strcmp(argv, "set") == 0)
+		|| ft_strcmp(argv, "put") == 0)
 		return (1);
 	return (0);
 }

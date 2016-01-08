@@ -42,9 +42,12 @@ static char*			prompt()
 	ft_bzero(request_ori, 1023);
 	ft_putstr("ft_p (client) ?>");
 	read(0, request_ori, 1023);
-	ft_bzero(request, ft_strlen(request));
-	request = ft_strtrim(request_ori);
-   	ft_bzero(request_ori, 1023);
+	if (ft_strlen(request_ori) - 1)
+	{
+		ft_bzero(request, ft_strlen(request));
+		request = ft_strtrim(request_ori);
+   		ft_bzero(request_ori, 1023);
+   	}
    	return (request);
 }
 
@@ -61,7 +64,7 @@ static int			do_commande_line(int sock, char *request, char **argv)
 		}
 		if (ft_strcmp(argv[0], "get") == 0)
 			return (option_get(sock, argv[1]));
-		if (ft_strcmp(argv[0], "set") == 0)
+		if (ft_strcmp(argv[0], "put") == 0)
 			return (option_set(sock, argv[1]));
 		if (ft_strcmp(argv[0], "ls") == 0)
 			return (option_ls(sock));
@@ -85,7 +88,6 @@ static int			do_work(int sock)
 	{
 		if (!(request = prompt()))
 		{
-			ft_putstr("Error during sending command.\n");
 			continue ;
 		}
 		argv = ft_strsplit(request, ' ');
