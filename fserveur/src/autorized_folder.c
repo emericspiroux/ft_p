@@ -12,15 +12,33 @@
 
 #include "ft_p.h"
 
-int					autorized_folder(int display, const char *path)
+static int		open_test(const char *path)
 {
-	char			save_dir[PATH_MAX];
-	static int		fnode = 0;
+	DIR			*fddir;
+	
+	if ((fddir = opendir(path)) == NULL)
+	{
+		error_open_dir((char*)path, 0);
+		return (1);
+	}
+	closedir(fddir);
+	return (0);
+}
 
-	if (fnode == 0)
+char*			autorized_folder(int display, const char *path)
+{
+	static		char save_dir[PATH_MAX];
+	static		int booldir = 0;
+	
+	if (ft_strlen(save_dir) <= 0)
 	{
 		if (ft_strlen(path) > 0)
-			chdir(path);
+		{
+			if (open_test(path))
+				ft_putstr(ANSI_COLOR_RED"Default Path Set"ANSI_COLOR_RESET);
+			else
+				chdir(path);
+		}
 		getcwd(save_dir, sizeof(save_dir));
 		if (display == 1)
 		{
@@ -28,12 +46,7 @@ int					autorized_folder(int display, const char *path)
 			ft_putstr(save_dir);
 			ft_putstr("\n");
 		}
-		if ((fnode = ft_getInode(save_dir)) == -1)
-		{
-			ft_putstr("Error on read base Folder.\n");
-			exit(1);
-		}
-		ft_bzero(save_dir, PATH_MAX);
+		booldir = 1;
 	}
-	return (fnode);
+	return (save_dir);
 }

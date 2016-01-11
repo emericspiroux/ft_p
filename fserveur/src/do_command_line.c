@@ -14,15 +14,15 @@
 
 static int				exec_command(int cs, int argc, char **av)
 {
-	if (ft_strcmp(av[0], "ls") == 0)
+	if (ft_strstr(av[0], "ls") != NULL)
 		return (option_ls(cs, argc, av));
-	if (ft_strcmp(av[0], "pwd") == 0)
+	else if (ft_strstr(av[0], "pwd") != NULL)
 		return (option_pwd(cs, argc, av));
-	if (ft_strcmp(av[0], "cd") == 0)
+	else if (ft_strstr(av[0], "cd") != NULL)
 		return (option_cd(cs, argc, av));
-	if (ft_strcmp(av[0], "get") == 0)
+	else if (ft_strstr(av[0], "get") != NULL)
 		return (option_get(cs, argc, av));
-	if (ft_strcmp(av[0], "put") == 0)
+	else if (ft_strstr(av[0], "put") != NULL)
 		return (option_set(cs, av[1]));
 	return (0);
 }

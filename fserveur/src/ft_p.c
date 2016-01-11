@@ -39,13 +39,15 @@ static int				do_work(int cs)
 	int					r;
 	char				buf[1024];
 	int					ret;
+	int					timeout;
 
 	ret = 1;
-	while (ret)
+	timeout = 0;
+	while (ret && timeout < 10)
 	{
 		ft_bzero(buf, 1023);
 		if ((r = read(cs, buf, 1023)) <= 0)
-			continue;
+			timeout++;
 		else
 		{
 			buf[r] = '\0';
@@ -71,9 +73,8 @@ static void				add_client(int sock, const char *path)
 {
 	pid_t				pid;
 	int					cs;
-	int					fnode;
 
-	fnode = autorized_folder(1, path);
+	autorized_folder(1, path);
 	ft_putstr(ANSI_COLOR_GREEN"[Server Started]\n"ANSI_COLOR_RESET);
 	while (1)
 	{

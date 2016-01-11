@@ -25,6 +25,7 @@ FT_C=$(SRC_DIR)ft_p.c $(SRC_DIR)send_confirmation.c $(SRC_DIR)options/option_ls.
 $(SRC_DIR)options/option_pwd.c $(SRC_DIR)ft_getINode.c \
 $(SRC_DIR)options/option_cd.c \
 $(SRC_DIR)autorized_folder.c \
+$(SRC_DIR)ft_realpath.c \
 $(SRC_DIR)options/option_get.c \
 $(SRC_DIR)options/option_set.c \
 $(SRC_DIR)error/error_open.c \
