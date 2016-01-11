@@ -12,30 +12,32 @@
 
 #include "ft_p.h"
 
-char			*error_open_dir(char *path, int ret)
+static const char		*construct_path(char *save, char *path)
 {
-	char		*save;
-	char		*tmp;
+	const char			*tmp;
+
+	tmp = ft_strjoin(save, path);
+	free(save);
+	return (tmp);
+}
+
+char					*error_open_dir(char *path, int ret)
+{
+	char				*save;
+	char				*tmp;
 
 	save = ft_strdup("ft_p : serveur : ");
+	tmp = NULL;
 	if (EACCES == errno)
 		tmp = ft_strjoin(save, "Permission denied.\n");
 	else if (EBADF == errno)
-		tmp = ft_strjoin(save, "file descriptor is not a valid for reading.\n");
+		tmp = ft_strjoin(save, "file descriptor is not a valid.\n");
 	else if (ENOTDIR == errno)
-	{
-		tmp = ft_strjoin(save, path);
-		free(save);
-		save = ft_strjoin(tmp, " is not a directory.\n");
-		free(tmp);
-		tmp = ft_strdup(save);
-	}
+		save = ft_strjoin(construct_path(save, path), " is not a directory.\n");
 	else if (EMFILE == errno)
-		tmp = ft_strjoin(save, "Too many file descriptors in use by process.\n");
-	else if (ENFILE == errno)
-		tmp = ft_strjoin(save, "Too many files are currently open in the system.\n");
+		tmp = ft_strjoin(save, "Too many file descriptors in use.\n");
 	else if (ENOENT == errno)
-		tmp = ft_strjoin(save, "Directory does not exist, or is empty string\n");
+		tmp = ft_strjoin(save, "Directory does not exist.\n");
 	else if (errno == 2)
 		tmp = ft_strjoin(save, "No such file or directory.\n");
 	else if (errno != 0)
@@ -43,9 +45,7 @@ char			*error_open_dir(char *path, int ret)
 	else
 		return (0);
 	if (!ret)
-	{
 		ft_putstr(tmp);
-	}
 	errno = 0;
 	return (tmp);
 }

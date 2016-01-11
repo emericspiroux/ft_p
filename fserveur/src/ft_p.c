@@ -27,7 +27,7 @@ static int				create_server(int port)
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	if (bind(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
 	{
-		ft_putstr("bind error. (Please change acces port or waiting a while before retry)\n");
+		ft_putstr("bind error. Please change acces port or waiting a while.\n");
 		return (-1);
 	}
 	listen(sock, NB_ACCEPT_CLIENT);
@@ -81,7 +81,7 @@ static void				add_client(int sock, const char *path)
 		if (!(cs = do_accept(sock)))
 		{
 			ft_putstr("Stack Client Full, please waiting a while.\n");
-			continue;
+			continue ;
 		}
 		pid = fork();
 		if (pid == 0)
@@ -92,7 +92,7 @@ static void				add_client(int sock, const char *path)
 		else if (pid > 0)
 		{
 			close(cs);
-			continue;
+			continue ;
 		}
 	}
 }

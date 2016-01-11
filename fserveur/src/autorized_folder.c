@@ -15,7 +15,7 @@
 static int		open_test(const char *path)
 {
 	DIR			*fddir;
-	
+
 	if ((fddir = opendir(path)) == NULL)
 	{
 		error_open_dir((char*)path, 0);
@@ -25,11 +25,11 @@ static int		open_test(const char *path)
 	return (0);
 }
 
-char*			autorized_folder(int display, const char *path)
+char			*autorized_folder(int display, const char *path)
 {
-	static		char save_dir[PATH_MAX];
-	static		int booldir = 0;
-	
+	static char	save_dir[PATH_MAX];
+	static int	booldir = 0;
+
 	if (ft_strlen(save_dir) <= 0)
 	{
 		if (ft_strlen(path) > 0)

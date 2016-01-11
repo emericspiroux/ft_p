@@ -12,34 +12,30 @@
 
 #include "ft_p.h"
 
-char			*error_open(char *path, int ret)
+static const char		*construct_path(char *save, char *path)
 {
-	char		*save;
-	char		*tmp;
+	const char			*tmp;
+
+	tmp = ft_strjoin(save, path);
+	free(save);
+	return (tmp);
+}
+
+char					*error_open(char *path, int ret)
+{
+	char				*save;
+	char				*tmp;
 
 	save = ft_strdup("ft_p : serveur : ");
+	tmp = NULL;
 	if (EACCES == errno)
-		tmp = ft_strjoin(save, "The requested access to the file is not allowed.\n");
-	else if (EDQUOT == errno)
-		tmp = ft_strjoin(save, "disk blocks or inodes has been exhausted.\n");
+		tmp = ft_strjoin(save, "The requested access is not allowed.\n");
 	else if (EEXIST == errno)
-	{
-		tmp = ft_strjoin(save, path);
-		free(save);
-		save = ft_strjoin(tmp, " already exists.\n");
-		free(tmp);
-		tmp = ft_strdup(save);
-	}
+		save = ft_strjoin(construct_path(save, path), " already exists.\n");
 	else if (EINVAL == errno)
 		tmp = ft_strjoin(save, "Invalid value in flags.\n");
 	else if (EISDIR == errno)
-	{
-		tmp = ft_strjoin(save, path);
-		free(save);
-		save = ft_strjoin(tmp, " is a directory.\n");
-		free(tmp);
-		tmp = ft_strdup(save);
-	}
+		save = ft_strjoin(construct_path(save, path), " is a directory.\n");
 	else if (errno == 2)
 		tmp = ft_strjoin(save, "No such file or directory.\n");
 	else if (errno != 0)

@@ -46,7 +46,11 @@ int					option_set(int cs, char *path)
 	char			*error;
 	char			*error_sent;
 
-	if ((fd = open(path, O_CREAT|O_WRONLY, S_IROTH|S_IRUSR|S_IWUSR)) == -1)
+	if ((fd = open(path, O_CREAT
+							| O_WRONLY,
+							S_IROTH
+							| S_IRUSR
+							| S_IWUSR)) == -1)
 	{
 		error = error_open(path, 1);
 		error_sent = ft_strjoin(error, ANSI_COLOR_RED"ERROR"ANSI_COLOR_RESET"\x2\0");

@@ -71,10 +71,10 @@ int						option_cd(int cs, int argc, char **argv)
 		resp = do_cd(argc, argv[1]);
 	else
 	{
-			ft_putstr("cd: string not in pwd : ");
-			ft_putstr(argv[1]);
-			ft_putstr("\n");
-			resp = 1;
+		ft_putstr("cd: string not in pwd : ");
+		ft_putstr(argv[1]);
+		ft_putstr("\n");
+		resp = 1;
 	}
 	close_redirect_stdout(fd_save);
 	errno = 0;

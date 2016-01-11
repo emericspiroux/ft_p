@@ -43,11 +43,11 @@ static int			advance_wait(char *buf, int sock)
 	return (1);
 }
 
-int				option_set(int sock, char *path)
+int					option_set(int sock, char *path)
 {
-	int			fd;
-	int			r;
-	char		buf[1024];
+	int				fd;
+	int				r;
+	char			buf[1024];
 
 	if ((fd = open(path, O_RDWR)) == -1)
 		return (return_open(path, sock));

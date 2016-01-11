@@ -12,12 +12,12 @@
 
 #include "ft_p.h"
 
-char *ft_realpath(const char *askpath)
+char		*ft_realpath(const char *askpath)
 {
-	char save_dir[PATH_MAX];
-	char save_askdir[PATH_MAX];
-	char *ret;
-	
+	char	save_dir[PATH_MAX];
+	char	save_askdir[PATH_MAX];
+	char	*ret;
+
 	getcwd(save_dir, sizeof(save_dir));
 	if (chdir(askpath) != 0)
 		return (NULL);

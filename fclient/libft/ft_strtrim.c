@@ -6,7 +6,7 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 11:50:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2014/01/07 03:39:52 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/04 12:36:05 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 static int	ft_isspace(char c)
 {
-	return ((c == ' ' || c == '\t') || (c == '\n' || c == '\v')
-		|| (c == '\f' || c == '\r') ||c == '\12');
+	if (((c == ' ' || c == '\t') || (c == '\n' || c == '\v')
+		|| (c == '\f' || c == '\r') || c == '\12'))
+		return (1);
+	return (0);
 }
 
 char		*ft_strtrim(char const *s)

@@ -14,12 +14,12 @@
 
 int				close_redirect_stdout(struct s_stdout fd)
 {
-		dup2(fd.save_stdout, 1);
-		dup2(fd.save_stderror, 2);
-		if (close(fd.save_stdout) == -1
-		|| close(fd.save_stderror) == -1
-		|| close(fd.oldfd) == -1)
-			return (-1);
-		else
-			return (0);
+	dup2(fd.save_stdout, 1);
+	dup2(fd.save_stderror, 2);
+	if (close(fd.save_stdout) == -1
+	|| close(fd.save_stderror) == -1
+	|| close(fd.oldfd) == -1)
+		return (-1);
+	else
+		return (0);
 }

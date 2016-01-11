@@ -6,7 +6,7 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 11:50:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2014/01/07 03:39:29 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/04 12:33:17 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char		*ft_strcat(char *dest, const char *src)
 	res = dest;
 	while (*dest)
 		dest++;
-	while ((*dest++ = *src++));
+	while ((*dest++ = *src++))
+	{
+	}
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/28 11:17:21 by akazian           #+#    #+#             */
-/*   Updated: 2013/12/27 15:08:03 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/03 19:56:21 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 		tmp = next;
 	}
 }
-

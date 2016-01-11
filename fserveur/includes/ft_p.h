@@ -40,41 +40,39 @@
 # define ANSI_COLOR_RESET   "\x1b[0m"
 # define NB_ACCEPT_CLIENT   50
 
-
 /*
 ** redirect_stdout
 */
-typedef struct		s_stdout{
-		int			oldfd;
-		int			save_stdout;
-		int			save_stderror;
-} t_stdout;
-
+typedef struct				s_stdout{
+	int						oldfd;
+	int						save_stdout;
+	int						save_stderror;
+}							t_stdout;
 
 /*
 ** Tools
 */
-int					send_all(int socket, void *buffer, size_t length);
-int					send_confirmation(int cs, int message);
-int					ft_getInode(char *path);
-int					is_autorized(char *name, char *path, int ls_opt);
-char				*error_open(char *path, int ret);
-char				*error_open_dir(char *path, int ret);
-struct s_stdout		redirect_stdout(int cs);
-int					close_redirect_stdout(struct s_stdout);
-void				wait_response(int cs);
-char				*ft_realpath(const char *askpath);
-char*				autorized_folder(int display, const char *path);
+int							send_all(int socket, void *buffer, size_t length);
+int							send_confirmation(int cs, int message);
+int							ft_getinode(char *path);
+int							is_autorized(char *name, char *path, int ls_opt);
+char						*error_open(char *path, int ret);
+char						*error_open_dir(char *path, int ret);
+struct s_stdout				redirect_stdout(int cs);
+int							close_redirect_stdout(struct s_stdout s);
+void						wait_response(int cs);
+char						*ft_realpath(const char *askpath);
+char						*autorized_folder(int display, const char *path);
 
 /*
 ** Available Commands
 */
-int					do_command_line(int cs, char *request);
+int							do_command_line(int cs, char *request);
 
-int					option_ls(int cs, int argc, char **argv);
-int					option_pwd(int cs, int argc, char **argv);
-int					option_cd(int cs, int argc, char **argv);
-int					option_get(int cs, int argc, char **argv);
-int					option_set(int cs, char *path);
+int							option_ls(int cs, int argc, char **argv);
+int							option_pwd(int cs, int argc, char **argv);
+int							option_cd(int cs, int argc, char **argv);
+int							option_get(int cs, int argc, char **argv);
+int							option_set(int cs, char *path);
 
 #endif

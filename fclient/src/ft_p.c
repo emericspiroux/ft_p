@@ -12,7 +12,7 @@
 
 #include "ft_p.h"
 
-static int			create_client(char *addr, int port)
+static int				create_client(char *addr, int port)
 {
 	int					sock;
 	struct protoent		*proto;
@@ -33,10 +33,10 @@ static int			create_client(char *addr, int port)
 	return (sock);
 }
 
-static char*			prompt()
+static char				*prompt(void)
 {
-	char			*request;
-	char			request_ori[1024];
+	char				*request;
+	char				request_ori[1024];
 
 	request = NULL;
 	ft_bzero(request_ori, 1023);
@@ -46,12 +46,12 @@ static char*			prompt()
 	{
 		ft_bzero(request, ft_strlen(request));
 		request = ft_strtrim(request_ori);
-   		ft_bzero(request_ori, 1023);
-   	}
-   	return (request);
+		ft_bzero(request_ori, 1023);
+	}
+	return (request);
 }
 
-static int			do_commande_line(int sock, char *request, char **argv)
+static int				do_commande_line(int sock, char *request, char **argv)
 {
 	if (is_command(argv[0]))
 	{
@@ -60,7 +60,7 @@ static int			do_commande_line(int sock, char *request, char **argv)
 			ft_putstr("ft_p : ");
 			ft_putstr(argv[0]);
 			ft_putstr(" : Error during sending command\n");
-   			return (0);
+			return (0);
 		}
 		if (ft_strcmp(argv[0], "get") == 0)
 			return (option_get(sock, argv[1]));
@@ -79,10 +79,10 @@ static int			do_commande_line(int sock, char *request, char **argv)
 	return (0);
 }
 
-static int			do_work(int sock)
+static int				do_work(int sock)
 {
-	char			*request;
-	char			**argv;
+	char				*request;
+	char				**argv;
 
 	while (1)
 	{
@@ -92,20 +92,20 @@ static int			do_work(int sock)
 		}
 		argv = ft_strsplit(request, ' ');
 		if (ft_strcmp(argv[0], "quit") == 0)
-   			break;
+			break ;
 		do_commande_line(sock, request, argv);
-   		free(request);
-   		free(argv);
-   	}
-   	if ((write(sock, "\x2\0", 2) < 0))
+		free(request);
+		free(argv);
+	}
+	if ((write(sock, "\x2\0", 2) < 0))
 		exit(EXIT_FAILURE);
 	return (0);
 }
 
-int					main(int argc, char const *av[])
+int						main(int argc, char const *av[])
 {
-	int		port;
-	int		sock;
+	int					port;
+	int					sock;
 
 	if (argc != 3)
 	{

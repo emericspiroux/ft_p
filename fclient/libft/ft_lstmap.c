@@ -6,13 +6,13 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/28 11:37:28 by akazian           #+#    #+#             */
-/*   Updated: 2013/12/27 15:08:04 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/03 19:56:52 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list * (*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*newlist;
 	t_list	*tmp;

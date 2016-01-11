@@ -20,17 +20,17 @@ int				is_autorized(char *name, char *path, int ls_opt)
 	base_path = autorized_folder(0, "");
 	if (path[ft_strlen(path) - 1] == '\n')
 		path[ft_strlen(path) - 1] = '\0';
-	if (ft_getInode(path) == -1)
+	if (ft_getinode(path) == -1)
 	{
 		if (ls_opt != 1)
 		{
 			error_open_dir(path, 0);
 			return (0);
 		}
-		else
-			return (1);
+		return (1);
 	}
-	if ((askpath = ft_realpath(path)) == NULL || ft_strstr(askpath, base_path) == NULL)
+	if ((askpath = ft_realpath(path)) == NULL
+		|| ft_strstr(askpath, base_path) == NULL)
 	{
 		ft_putstr("ft_p: ");
 		ft_putstr(name);

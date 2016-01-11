@@ -12,18 +12,15 @@
 
 #include "ft_p.h"
 
-int				error_open(char *path)
+void			error_open(char *path)
 {
 	ft_putstr("ft_p : client : ");
 	if (EACCES == errno)
 		ft_putstr("The requested access to the file is not allowed\n");
 	else if (EDQUOT == errno)
-		ft_putstr("disk blocks or inodes has been exhausted\n");
+		ft_putstr("Disk blocks or inodes has been exhausted\n");
 	else if (EEXIST == errno)
-	{
-		ft_putstr(path);
-		ft_putstr(" already exists\n");
-	}
+		ft_putstr("Already exists\n");
 	else if (EINVAL == errno)
 		ft_putstr("Invalid value in flags.\n");
 	else if (EISDIR == errno)
@@ -40,5 +37,4 @@ int				error_open(char *path)
 		ft_putstr("\n");
 	}
 	errno = 0;
-	return (0);
 }

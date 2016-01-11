@@ -26,7 +26,7 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 
-int			error_open(char *path);
+void		error_open(char *path);
 int			send_all(int sock, void *buffer, size_t length);
 int			read_response(int sock);
 int			wait_response(int sock);

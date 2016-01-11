@@ -6,7 +6,7 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 11:50:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2013/12/27 15:09:04 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/04 11:39:36 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 	{
 		if (siz != 0)
 			*d = '\0';
-		while (*s++);
+		while (*s++)
+		{
+		}
 	}
 	return (s - src - 1);
 }

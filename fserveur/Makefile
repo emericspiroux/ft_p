@@ -22,7 +22,7 @@ INC_DIR=includes/
 SRC_DIR=src/
 
 FT_C=$(SRC_DIR)ft_p.c $(SRC_DIR)send_confirmation.c $(SRC_DIR)options/option_ls.c\
-$(SRC_DIR)options/option_pwd.c $(SRC_DIR)ft_getINode.c \
+$(SRC_DIR)options/option_pwd.c $(SRC_DIR)ft_getinode.c \
 $(SRC_DIR)options/option_cd.c \
 $(SRC_DIR)autorized_folder.c \
 $(SRC_DIR)ft_realpath.c \

@@ -6,7 +6,7 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 12:21:39 by rbenjami          #+#    #+#             */
-/*   Updated: 2014/01/07 03:38:26 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/04 12:32:30 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static int	ft_isspace(char c)
 {
-	return ((c == ' ' || c == '\t') || (c == '\n' || c == '\v')
-		|| (c == '\f' || c == '\r') ||c == '\12');
+	if ((c == ' ' || c == '\t') || (c == '\n' || c == '\v')
+			|| (c == '\f' || c == '\r') || c == '\12')
+		return (1);
+	return (0);
 }
 
 int			ft_atoi(const char *str)

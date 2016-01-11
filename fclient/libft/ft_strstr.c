@@ -6,7 +6,7 @@
 /*   By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 12:21:39 by rbenjami          #+#    #+#             */
-/*   Updated: 2013/12/27 15:09:13 by espiroux         ###   ########.fr       */
+/*   Updated: 2015/03/03 20:00:51 by espiroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strstr(const char *str, const char *find)
 	while (*cp)
 	{
 		s1 = cp;
-		s2 = (char *) find;
+		s2 = (char *)find;
 		while (*s1 && *s2 && !(*s1 - *s2))
 		{
 			s1++;

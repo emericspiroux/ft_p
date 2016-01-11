@@ -6,7 +6,7 @@
 #    By: espiroux <espiroux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 09:49:07 by espiroux          #+#    #+#              #
-#    Updated: 2013/11/20 11:31:21 by espiroux         ###   ########.fr        #
+#    Updated: 2016/01/08 14:36:40 by espiroux         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,8 +24,7 @@ LSRCS= ft_isascii.c ft_memchr.c ft_putstr.c ft_strdup.c ft_strncpy.c		   \
 	ft_strmap.c ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
 	ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar_fd.c ft_putstr_fd.c		   \
 	ft_putendl_fd.c ft_putnbr_fd.c ft_putendl.c ft_lstdel.c ft_lstdelone.c	   \
-	ft_lstnew.c ft_realloc.c ft_isdigit.c ft_putchar.c ft_lstmap.c \
-	ft_strcontains.c
+	ft_lstnew.c ft_realloc.c ft_isdigit.c ft_putchar.c ft_lstmap.c ft_strcontains.c
 
 LOBJS = $(LSRCS:.c=.o)
 
@@ -41,7 +40,7 @@ $(NAME): compiling $(LOBJS)
 	@echo " done !"
 
 %.o : %.c
-	@$(CC) $(FLAGS) -o $@ -c $^ -I./
+	@$(CC) $(FLAGS) -o $@ -c $^ -I./includes
 	@echo -n .
 
 compiling:

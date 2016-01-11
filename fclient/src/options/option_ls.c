@@ -12,7 +12,7 @@
 
 #include "ft_p.h"
 
-int				option_ls(int sock)
+int					option_ls(int sock)
 {
 	int				r;
 	char			buf[1024];
@@ -22,12 +22,12 @@ int				option_ls(int sock)
 	i = 0;
 	while ((r = read(sock, buf, 1023)) > 0)
 	{
-			i++;
-			buf[r] = '\0';
-			ft_putstr(buf);
-			if (ft_strchr(buf, '\x2') != NULL)
-				break;
-			ft_bzero(buf, 1023);
+		i++;
+		buf[r] = '\0';
+		ft_putstr(buf);
+		if (ft_strchr(buf, '\x2') != NULL)
+			break ;
+		ft_bzero(buf, 1023);
 	}
 	ft_putstr("\n");
 	return (1);

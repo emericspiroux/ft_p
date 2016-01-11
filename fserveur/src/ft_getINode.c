@@ -12,14 +12,13 @@
 
 #include "ft_p.h"
 
-int					ft_getInode(char *path)
+int					ft_getinode(char *path)
 {
 	DIR				*rep;
 	struct dirent	*rf;
 
 	rf = NULL;
 	rep = NULL;
-
 	if ((rep = opendir(path)) == NULL)
 		return (-1);
 	rf = readdir(rep);
