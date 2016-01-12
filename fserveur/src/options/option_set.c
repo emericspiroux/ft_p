@@ -46,6 +46,8 @@ int					option_set(int cs, char *path)
 	char			*error;
 	char			*error_sent;
 
+	if (path[ft_strlen(path) - 1] == '\n')
+		path[ft_strlen(path) - 1] = '\0';
 	if ((fd = open(path, O_CREAT
 							| O_WRONLY,
 							S_IROTH

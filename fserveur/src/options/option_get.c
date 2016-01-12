@@ -25,6 +25,7 @@ static void		write_file(int cs, int fd)
 	}
 	write(cs, "\x2", 1);
 	ft_bzero(buf, 1023);
+	send_confirmation(cs, 0);
 }
 
 int				option_get(int cs, int argc, char **argv)
@@ -34,6 +35,8 @@ int				option_get(int cs, int argc, char **argv)
 	char		*error_sent;
 
 	(void)argc;
+	if (argv[1][ft_strlen(argv[1]) - 1] == '\n')
+		argv[1][ft_strlen(argv[1]) - 1] = '\0';
 	if ((fd = open(argv[1], O_RDWR)) == -1)
 	{
 		error = error_open(argv[1], 1);
@@ -46,6 +49,5 @@ int				option_get(int cs, int argc, char **argv)
 	write_file(cs, fd);
 	wait_response(cs);
 	close(fd);
-	send_confirmation(cs, 0);
 	return (1);
 }
