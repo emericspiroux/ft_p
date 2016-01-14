@@ -34,7 +34,8 @@ $(SRC_DIR)is_autorized.c \
 $(SRC_DIR)redirect_stdout.c \
 $(SRC_DIR)close_redirect_stdout.c \
 $(SRC_DIR)wait_response.c \
-$(SRC_DIR)do_command_line.c
+$(SRC_DIR)do_command_line.c\
+$(SRC_DIR)get_next_line.c
 
 FT_O=$(FT_C:.c=.o)
 

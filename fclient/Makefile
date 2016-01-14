@@ -28,7 +28,8 @@ FT_C=	$(SRC_DIR)ft_p.c\
 		$(SRC_DIR)options/option_cd.c $(SRC_DIR)error/error_open.c \
 		$(SRC_DIR)read_response.c\
 		$(SRC_DIR)wait_response.c\
-		$(SRC_DIR)is_command.c
+		$(SRC_DIR)is_command.c \
+		$(SRC_DIR)get_next_line.c
 
 FT_O=$(FT_C:.c=.o)
 

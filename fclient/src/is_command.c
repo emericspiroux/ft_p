@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/04 14:23:22 by larry             #+#    #+#             */
-/*   Updated: 2015/09/04 14:24:04 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/13 23:22:02 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int				is_command(char *argv)
 		|| ft_strcmp(argv, "quit") == 0
 		|| ft_strcmp(argv, "cd") == 0
 		|| ft_strcmp(argv, "get") == 0
-		|| ft_strcmp(argv, "put") == 0)
+		|| ft_strcmp(argv, "put") == 0
+		|| ft_strcmp(argv, "set") == 0)
 		return (1);
 	return (0);
 }

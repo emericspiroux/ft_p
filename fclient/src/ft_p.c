@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:49:00 by larry             #+#    #+#             */
-/*   Updated: 2015/09/04 14:36:38 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 00:54:35 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static int				create_client(char *addr, int port)
 	sock = socket(PF_INET, SOCK_STREAM, proto->p_proto);
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
-	sin.sin_addr.s_addr = inet_addr(addr);
+	if (!ft_strcmp(addr, "localhost"))
+		sin.sin_addr.s_addr = inet_addr("127.0.0.1");
+	else
+		sin.sin_addr.s_addr = inet_addr(addr);
 	if (connect(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
 	{
 		ft_putstr("connect error.\n");
@@ -64,7 +67,7 @@ static int				do_commande_line(int sock, char *request, char **argv)
 		}
 		if (ft_strcmp(argv[0], "get") == 0)
 			return (option_get(sock, argv[1]));
-		if (ft_strcmp(argv[0], "put") == 0)
+		if (ft_strcmp(argv[0], "put") == 0 || ft_strcmp(argv[0], "set") == 0)
 			return (option_set(sock, argv[1]));
 		if (ft_strcmp(argv[0], "ls") == 0)
 			return (option_ls(sock));

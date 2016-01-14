@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/01 16:19:29 by larry             #+#    #+#             */
-/*   Updated: 2015/09/01 17:25:28 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/13 19:16:12 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char					*error_open_dir(char *path, int ret)
 	else if (EBADF == errno)
 		tmp = ft_strjoin(save, "file descriptor is not a valid.\n");
 	else if (ENOTDIR == errno)
-		save = ft_strjoin(construct_path(save, path), " is not a directory.\n");
+		tmp = ft_strjoin(construct_path(save, path), " is not a directory.\n");
 	else if (EMFILE == errno)
 		tmp = ft_strjoin(save, "Too many file descriptors in use.\n");
 	else if (ENOENT == errno)

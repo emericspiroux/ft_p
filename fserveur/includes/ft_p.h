@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2015/09/04 15:57:59 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 16:49:46 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ int							option_ls(int cs, int argc, char **argv);
 int							option_pwd(int cs, int argc, char **argv);
 int							option_cd(int cs, int argc, char **argv);
 int							option_get(int cs, int argc, char **argv);
-int							option_set(int cs, char *path);
+int							option_set(int cs, int argc, char *path);
 
 #endif

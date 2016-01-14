@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/02 17:55:44 by larry             #+#    #+#             */
-/*   Updated: 2015/09/04 15:57:35 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 17:14:59 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int				exec_command(int cs, int argc, char **av)
 	else if (ft_strstr(av[0], "cd") != NULL)
 		return (option_cd(cs, argc, av));
 	else if (ft_strstr(av[0], "get") != NULL)
-		return (option_get(cs, argc, av));
+			return (option_get(cs, argc, av));
 	else if (ft_strstr(av[0], "put") != NULL || ft_strstr(av[0], "set"))
-		return (option_set(cs, av[1]));
+		return (option_set(cs, argc, av[1]));
 	else if (ft_strstr(av[0], "quit") != NULL)
 		exit(0);
 	return (0);

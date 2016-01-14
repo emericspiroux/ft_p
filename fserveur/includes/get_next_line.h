@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_response.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/03 18:24:13 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 01:33:53 by larry            ###   ########.fr       */
+/*   Created: 2013/12/03 13:12:42 by espiroux          #+#    #+#             */
+/*   Updated: 2016/01/14 02:55:16 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_p.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+#define BUFF_SIZE 1024
 
-int				read_response(int sock)
-{
-	char		buf[1024];
-	int			r;
 
-	if ((r = read(sock, buf, 1023)) > 0)
-	{
-		buf[r] = '\0';
-		ft_putstr(buf);
-		ft_putstr("\n");
-		ft_bzero(buf, 1023);
-		return (1);
-	}
-	return (0);
-}
+int	get_next_line(int const fd, char ** line);
+
+#endif /*GET_NEXT_LINE_H*/

@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/27 18:02:46 by larry             #+#    #+#             */
-/*   Updated: 2015/09/03 19:05:53 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 17:14:36 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int			advance_wait(char *buf, int sock)
 	{
 		buf[r] = '\0';
 		ft_bzero(buf, 1023);
-		if (ft_strstr(buf, "ERROR\x2\x2"))
+		if (ft_strstr(buf, "\x4\x2"))
 		{
 			ft_bzero(buf, 1023);
 			write(sock, "\x2", 1);
