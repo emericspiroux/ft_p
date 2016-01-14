@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 16:49:46 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 20:22:35 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <fcntl.h>
 # include <dirent.h>
 
+# define BUFF_ERROR_MSG   512
+
 /*
 ** color str
 */
@@ -48,6 +50,12 @@ typedef struct				s_stdout{
 	int						save_stdout;
 	int						save_stderror;
 }							t_stdout;
+
+typedef struct				s_header_ftp{
+	size_t					size;
+	int						bool_error;
+	size_t					error_msg[BUFF_ERROR_MSG];
+}							t_header_ftp;
 
 /*
 ** Tools

@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/26 15:49:52 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 16:33:28 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 21:13:34 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void			display_response(char *buf)
 	ft_putchar('\n');
 }
 
-static int			write_file(int fd, int sock, char *path)
+static int			write_file(int fd, int sock, char *path, int size)
 {
 	char			buf[1024];
 	int				r;
@@ -27,13 +27,14 @@ static int			write_file(int fd, int sock, char *path)
 	char			**split;
 
 	ft_bzero(buf, 1023);
-	while ((r = read(sock, buf, 1023)) > 0)
+	r = 0;
+	while ((r < size))
 	{
-		buf[r] = '\0';
+		r += read(sock, buf, 1023)) > 0
 		if (ft_strstr(buf, "\x4\x2") != NULL)
 		{
 			display_response(buf);
-			unlink(path);
+
 			break ;
 		}
 		if ((last_char = ft_strchr(buf, '\x3')) != NULL)
@@ -56,9 +57,31 @@ static int			write_file(int fd, int sock, char *path)
 	return (1);
 }
 
+static int			read_header(int sock)
+{
+	int				r;
+	t_header_ftp	*head;
+
+	r = 0;
+	while ((r != sizeof(t_header_ftp))
+		r += read(sock, head, sizeof(t_header_ftp));
+	if (head->error == 1)
+	{
+		ft_putstr(head->error_msg);
+		return (0);
+	}
+	else
+	{
+		return (head->size);
+	}
+
+
+}
+
 int					option_get(int sock, char *path)
 {
 	int				fd;
+	int				size;
 
 	if ((fd = open(path, O_CREAT
 						| O_WRONLY | O_RDONLY | O_TRUNC,
@@ -69,6 +92,10 @@ int					option_get(int sock, char *path)
 		error_open(path);
 		return (0);
 	}
-	write_file(fd, sock, path);
+	if ((size = read_header(sock)))
+		write_file(fd, sock, path, size);
+	else
+		unlink(path);
+	close(fd);
 	return (1);
 }

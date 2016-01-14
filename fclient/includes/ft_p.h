@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2015/09/04 14:24:29 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/14 21:04:35 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # include <sys/time.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+
+# define BUFF_ERROR_MSG   512
+
+typedef struct				s_header_ftp{
+	size_t					size;
+	int						bool_error;
+	size_t					error_msg[BUFF_ERROR_MSG];
+}							t_header_ftp;
 
 void		error_open(char *path);
 int			send_all(int sock, void *buffer, size_t length);
