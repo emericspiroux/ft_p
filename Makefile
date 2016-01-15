@@ -20,18 +20,17 @@ LIBFT_DIR=libft/
 all: $(NAME)
 
 $(NAME):lib serveurnolib clientnolib
-		@echo CREATE $(NAME)
 
 lib:
 		@(cd $(LIBFT_DIR) && $(MAKE))
 
 serveurnolib:
 		@(cd $(S_DIR) && $(MAKE) nolibft)
-		mv $(S_DIR)/serveur ./serveur
+		@(mv $(S_DIR)/serveur ./serveur)
 
 clientnolib:
 		@(cd $(C_DIR) && $(MAKE) nolibft)
-		mv $(C_DIR)/client ./client
+		@(mv $(C_DIR)/client ./client)
 
 serveur:
 		@(cd $(S_DIR) && $(MAKE))
