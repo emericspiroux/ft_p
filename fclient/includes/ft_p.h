@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 21:04:35 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/15 04:15:44 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			send_all(int sock, void *buffer, size_t length);
 int			read_response(int sock);
 int			wait_response(int sock);
 int			is_command(char *argv);
+void		init_head(t_header_ftp	*head);
 
 int			option_ls(int sock);
 int			option_pwd(int sock);

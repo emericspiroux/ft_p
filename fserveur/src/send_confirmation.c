@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/21 12:26:08 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 01:32:11 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/15 01:58:16 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void			send_check(int cs)
 {
-	write(cs, ANSI_COLOR_GREEN"SUCCESS"ANSI_COLOR_RESET"\x2\0", 17);
+	write(cs, ANSI_COLOR_GREEN"SUCCESS"ANSI_COLOR_RESET"\n\x2\0", 18);
 }
 
 static void			send_error(int cs)
 {
-	write(cs, ANSI_COLOR_RED"ERROR"ANSI_COLOR_RESET"\x2\0", 16);
+	write(cs, ANSI_COLOR_RED"ERROR"ANSI_COLOR_RESET"\n\x2\0", 19);
 }
 
 int					send_confirmation(int cs, int message)

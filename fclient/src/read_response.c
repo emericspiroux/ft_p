@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 18:24:13 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 01:33:53 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/15 01:59:06 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int				read_response(int sock)
 	{
 		buf[r] = '\0';
 		ft_putstr(buf);
-		ft_putstr("\n");
 		ft_bzero(buf, 1023);
 		return (1);
 	}

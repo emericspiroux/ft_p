@@ -6,61 +6,92 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/27 18:02:46 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 17:14:36 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/15 04:15:55 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
+#include <sys/stat.h>
+#include <unistd.h>
 
-static int			return_open(char *path, int sock)
+static int			write_header(int cs, int fd, char *path)
 {
-	error_open(path);
-	wait_response(sock);
-	write(sock, "ERROR\x2", 7);
-	read_response(sock);
-	return (0);
+	t_header_ftp	head;
+	struct stat		buf;
+
+	init_head(&head);
+	if (fd == -1)
+	{
+		head.bool_error = 1;
+		error_open(path);
+	}
+	else if (!fstat(fd, &buf))
+		head.size = buf.st_size;
+	write(cs, &head, sizeof(t_header_ftp));
+	return (head.size);
 }
 
-static int			advance_wait(char *buf, int sock)
+static int			write_size(int cs, int size)
+{
+	t_header_ftp	head;
+
+	init_head(&head);
+	head.size = size;
+	write(cs, &head, sizeof(t_header_ftp));
+	return (head.size);
+}
+
+static int			read_header(int sock)
 {
 	int				r;
+	t_header_ftp	head;
 
-	ft_bzero(buf, 1023);
-	if ((r = read(sock, buf, 1023)) > 0)
+	r = 0;
+	while (r != sizeof(t_header_ftp))
+		r += read(sock, &head, sizeof(t_header_ftp));
+	if (head.bool_error == 1)
 	{
-		buf[r] = '\0';
-		ft_bzero(buf, 1023);
-		if (ft_strstr(buf, "\x4\x2"))
-		{
-			ft_bzero(buf, 1023);
-			write(sock, "\x2", 1);
-			ft_bzero(buf, 1023);
-			read_response(sock);
-			return (0);
-		}
+		ft_putstr((const char *)head.error_msg);
+		return (0);
 	}
-	ft_bzero(buf, 1023);
-	return (1);
+	else
+		return (1);
 }
 
-int					option_set(int sock, char *path)
+static void			write_file(int cs, int fd, int size)
+{
+	char			buf[1024];
+	int				r;
+	int				tmp;
+	int				save;
+
+	r = 0;
+	save = 0;
+	while (r < size)
+	{
+		ft_bzero(buf, 1023);
+		tmp = read(fd, buf, 1023);
+		write_size(cs, tmp);
+		write(cs, buf, tmp);
+		if (!read_header(cs))
+		{
+			lseek(fd, save, SEEK_SET);
+			continue ;
+		}
+		r += tmp;
+		save = tmp;
+	}
+}
+
+int					option_set(int cs, char *path)
 {
 	int				fd;
-	int				r;
-	char			buf[1024];
+	int				size;
 
-	if ((fd = open(path, O_RDWR)) == -1)
-		return (return_open(path, sock));
-	if (!advance_wait(buf, sock))
-		return (0);
-	while ((r = read(fd, buf, 1023)) > 0)
-	{
-		buf[r] = '\0';
-		write(sock, buf, ft_strlen(buf));
-		ft_bzero(buf, 1023);
-	}
+	fd = open(path, O_RDWR);
+	if (read_header(cs) && (size = write_header(cs, fd, path)))
+		write_file(cs, fd, size);
+	read_response(cs);
 	close(fd);
-	write(sock, "\x2", 1);
-	read_response(sock);
 	return (1);
 }

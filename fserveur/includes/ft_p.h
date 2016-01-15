@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:26:33 by larry             #+#    #+#             */
-/*   Updated: 2016/01/14 20:22:35 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/15 04:18:03 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int							close_redirect_stdout(struct s_stdout s);
 void						wait_response(int cs);
 char						*ft_realpath(const char *askpath);
 char						*autorized_folder(int display, const char *path);
+void						init_head(t_header_ftp	*head);
 
 /*
 ** Available Commands
