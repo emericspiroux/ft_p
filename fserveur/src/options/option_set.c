@@ -82,7 +82,6 @@ static int			write_file(int fd, int sock, int size)
 		ft_bzero(buf, 1023);
 	}
 	close(fd);
-	ft_bzero(buf, 1023);
 	return (1);
 }
 
@@ -93,16 +92,14 @@ int					option_set(int sock, int argc, char *path)
 
 	if (argc != 2)
 	{
-		write_header(sock, -1, ft_strdup("ft_p : serveur : Usage : set <PathFile>\n"));
+		write_header(sock, -1, "ft_p : serveur : Usage : set <PathFile>\n");
 		send_confirmation(sock, 1);
 		return (0);
 	}
-	fd = open(path, O_CREAT
-						| O_WRONLY | O_RDONLY | O_TRUNC,
-						S_IROTH
-						| S_IRUSR
+	fd = open(path, O_CREAT | O_WRONLY | O_RDONLY | O_TRUNC, S_IROTH | S_IRUSR
 						| S_IWUSR);
-	if (!write_header(sock, fd, error_open(path, 1)) && (size = read_header(sock)))
+	if (!write_header(sock, fd, error_open(path, 1))
+		&& (size = read_header(sock)))
 	{
 		write_file(fd, sock, size);
 		send_confirmation(sock, 0);

@@ -35,7 +35,7 @@ char			*autorized_folder(int display, const char *path)
 		if (ft_strlen(path) > 0)
 		{
 			if (open_test(path))
-				ft_putstr(ANSI_COLOR_RED"Default Path Set"ANSI_COLOR_RESET);
+				ft_putstr(ANSI_COLOR_RED"Default folder can't be Set\n"ANSI_COLOR_RESET);
 			else
 				chdir(path);
 		}

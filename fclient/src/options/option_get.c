@@ -68,7 +68,6 @@ static int			write_file(int fd, int sock, int size)
 		ft_bzero(buf, 1023);
 	}
 	close(fd);
-	ft_bzero(buf, 1023);
 	return (1);
 }
 

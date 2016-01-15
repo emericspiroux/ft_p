@@ -12,7 +12,7 @@
 
 #include "ft_p.h"
 
-void			init_head(t_header_ftp	*head)
+void			init_head(t_header_ftp *head)
 {
 	head->bool_error = 0;
 	ft_bzero(head->error_msg, BUFF_ERROR_MSG);

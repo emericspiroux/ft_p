@@ -21,7 +21,7 @@ static int				exec_command(int cs, int argc, char **av)
 	else if (ft_strstr(av[0], "cd") != NULL)
 		return (option_cd(cs, argc, av));
 	else if (ft_strstr(av[0], "get") != NULL)
-			return (option_get(cs, argc, av));
+		return (option_get(cs, argc, av));
 	else if (ft_strstr(av[0], "put") != NULL || ft_strstr(av[0], "set"))
 		return (option_set(cs, argc, av[1]));
 	else if (ft_strstr(av[0], "quit") != NULL)

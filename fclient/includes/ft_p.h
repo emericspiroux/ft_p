@@ -26,25 +26,25 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 
-# define BUFF_ERROR_MSG   512
+# define BUFF_ERROR_MSG 512
 
-typedef struct				s_header_ftp{
-	size_t					size;
-	int						bool_error;
-	size_t					error_msg[BUFF_ERROR_MSG];
-}							t_header_ftp;
+typedef struct		s_header_ftp{
+	size_t			size;
+	int				bool_error;
+	size_t			error_msg[BUFF_ERROR_MSG];
+}					t_header_ftp;
 
-void		error_open(char *path);
-int			send_all(int sock, void *buffer, size_t length);
-int			read_response(int sock);
-int			wait_response(int sock);
-int			is_command(char *argv);
-void		init_head(t_header_ftp	*head);
+void				error_open(char *path);
+int					send_all(int sock, void *buffer, size_t length);
+int					read_response(int sock);
+int					wait_response(int sock);
+int					is_command(char *argv);
+void				init_head(t_header_ftp	*head);
 
-int			option_ls(int sock);
-int			option_pwd(int sock);
-int			option_cd(int sock);
-int			option_get(int sock, char *path);
-int			option_set(int sock, char *path);
+int					option_ls(int sock);
+int					option_pwd(int sock);
+int					option_cd(int sock);
+int					option_get(int sock, char *path);
+int					option_set(int sock, char *path);
 
 #endif

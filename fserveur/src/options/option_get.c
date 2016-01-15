@@ -69,14 +69,14 @@ static void			write_file(int cs, int fd, int size)
 	while (r < size)
 	{
 		ft_bzero(buf, 1023);
-     	tmp = read(fd, buf, 1023);
-     	write_size(cs, tmp);
-     	write(cs, buf, tmp);
-     	if (!read_header(cs))
-     	{
-     		lseek(fd, save, SEEK_SET);
-     		continue ;
-     	}
+		tmp = read(fd, buf, 1023);
+		write_size(cs, tmp);
+		write(cs, buf, tmp);
+		if (!read_header(cs))
+		{
+			lseek(fd, save, SEEK_SET);
+			continue ;
+		}
 		r += tmp;
 		save = tmp;
 	}
@@ -86,10 +86,12 @@ int					option_get(int cs, int argc, char **argv)
 {
 	int				fd;
 	int				size;
+	char			*error;
 
+	error = ft_strdup("ft_p : serveur : Usage : get <PathFile>\n");
 	if (argc != 2)
 	{
-		write_header(cs, -1, ft_strdup("ft_p : serveur : Usage : get <PathFile>\n"));
+		write_header(cs, -1, error);
 		return (0);
 	}
 	if ((fd = open(argv[1], O_RDWR)) == -1)

@@ -39,7 +39,6 @@ int					option_ls(int cs, int argc, char **argv)
 	struct rusage	usage;
 	t_stdout		save_std;
 
-	(void)argc;
 	errno = 0;
 	save_std = redirect_stdout(cs);
 	if (argv[1] && argv[1][ft_strlen(argv[1]) - 1] == '\n')
@@ -51,8 +50,7 @@ int					option_ls(int cs, int argc, char **argv)
 			execv("/bin/ls", argv);
 		else
 		{
-			cpid = wait4(pid, &status, 0, &usage);
-			if (cpid == pid)
+			if ((cpid = wait4(pid, &status, 0, &usage)) == pid)
 				send_confirmation(cs, WEXITSTATUS(status));
 		}
 	}
