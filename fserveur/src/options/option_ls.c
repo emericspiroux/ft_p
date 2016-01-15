@@ -6,7 +6,7 @@
 /*   By: larry <larry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 18:24:03 by larry             #+#    #+#             */
-/*   Updated: 2015/09/02 17:38:18 by larry            ###   ########.fr       */
+/*   Updated: 2016/01/15 05:39:31 by larry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int					option_ls(int cs, int argc, char **argv)
 	(void)argc;
 	errno = 0;
 	save_std = redirect_stdout(cs);
+	if (argv[1] && argv[1][ft_strlen(argv[1]) - 1] == '\n')
+		argv[1][ft_strlen(argv[1]) - 1] = '\0';
 	if (they_autorized(argc, argv))
 	{
 		pid = fork();
