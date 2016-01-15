@@ -16,7 +16,7 @@ export CFLAGS= -Werror -Wall -Wextra
 
 MLX_FLAGS= -lmlx -lXext -lX11
 NAME=client
-LIBFT_DIR=libft/
+LIBFT_DIR=../libft/
 LIBMLX_DIR=/usr/X11/lib
 INC_DIR=includes/
 SRC_DIR=src/
@@ -37,7 +37,11 @@ all: $(NAME)
 
 $(NAME): a
 		@echo CREATE $(NAME)
-		@gcc $(CFLAGS) -I $(INC_DIR) $(FT_C) ./libft/libft.a -o $(NAME) -g
+		@gcc $(CFLAGS) -I $(INC_DIR) $(FT_C) ../libft/libft.a -o $(NAME) -g
+
+nolibft:
+		@echo CREATE $(NAME)
+		@gcc $(CFLAGS) -I $(INC_DIR) $(FT_C) ../libft/libft.a -o $(NAME) -g
 
 a:
 		@(cd $(LIBFT_DIR) && $(MAKE))
@@ -48,6 +52,7 @@ clean:
 
 
 fclean: clean
+		@(cd $(LIBFT_DIR) && $(MAKE) $@)
 		@/bin/rm $(NAME)
 
 re: fclean all
