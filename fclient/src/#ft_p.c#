@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************** *0;95;c/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_p.c                                             :+:      :+:    :+:   */
@@ -44,7 +44,7 @@ static char				*prompt(void)
 	request = NULL;
 	ft_bzero(request_ori, 1023);
 	ft_putstr("ft_p (client) ?>");
-	if (read(0, request_ori, 1023) > 1)
+	if (read(0, request_ori, 1023) > 0)
 	{
 		ft_bzero(request, ft_strlen(request));
 		request = ft_strtrim(request_ori);
