@@ -44,8 +44,7 @@ static char				*prompt(void)
 	request = NULL;
 	ft_bzero(request_ori, 1023);
 	ft_putstr("ft_p (client) ?>");
-	read(0, request_ori, 1023);
-	if (ft_strlen(request_ori) - 1)
+	if (ft_strlen(request_ori) - 1 && read(0, request_ori, 1023) != -1)
 	{
 		ft_bzero(request, ft_strlen(request));
 		request = ft_strtrim(request_ori);
